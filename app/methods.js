@@ -1,3 +1,4 @@
+const { log } = require("console");
 const pool = require("./db"); // debes importar pool desde tu archivo de base de datos db.js
 
 class FiltrarTipo {
@@ -41,7 +42,12 @@ class EditarNombreYTipo {
       );
       return result.rows;
     } catch (err) {
-      throw err;
+      console.error(
+        `Error al actualizar la tabla ${nombreTabla}: ${err.message}`
+      );
+      throw new Error(
+        `Error al actualizar la tabla ${nombreTabla}: ${err.message}`
+      );
     }
   }
 }

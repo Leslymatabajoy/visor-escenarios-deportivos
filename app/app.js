@@ -1,4 +1,5 @@
 const nombreTabla = "escenariodeportivo";
+let nombreIndex, tipoIndex; // Definirlos fuera de la función para que sean accesibles globalmente
 
 function filtrarPorTipo() {
   const tipo = document.getElementById("tipo").value;
@@ -9,7 +10,6 @@ function filtrarPorTipo() {
       divResultados.innerHTML = "";
       const tabla = document.createElement("table");
 
-      let nombreIndex, tipoIndex;
       const filaEncabezado = document.createElement("tr");
       if (data.length > 0) {
         let index = 0;
@@ -25,27 +25,27 @@ function filtrarPorTipo() {
           index++;
         }
         const celdaEncabezadoUbicacion = document.createElement("th");
-        celdaEncabezadoUbicacion.textContent = "Ubicación";
+        celdaEncabezadoUbicacion.textContent = "Acciones";
         filaEncabezado.appendChild(celdaEncabezadoUbicacion);
       }
       tabla.appendChild(filaEncabezado);
 
-      data.forEach((objeto) => {
+      data.forEach((objeto, index) => {
         const fila = document.createElement("tr");
-        for (const propiedad in objeto) {
+        Object.keys(objeto).forEach((propiedad, i) => {
           const celda = document.createElement("td");
-          if (propiedad === "nombre" || propiedad === "tipo") {
-            celda.setAttribute("contenteditable", "true"); // Hace que la celda sea editable
+          if (i === nombreIndex || i === tipoIndex) {
+            celda.setAttribute("contenteditable", "true");
           }
           celda.textContent = objeto[propiedad];
           fila.appendChild(celda);
-        }
+        });
 
         const celdaBoton = document.createElement("td");
         const boton = document.createElement("button");
-        boton.setAttribute("id", "ir-a");
+        boton.setAttribute("id", "ir-a")
         boton.addEventListener("click", function () {
-          irUbicacion(geojsonFeature, objeto.id); // Suponiendo que objeto.id contiene el ID de la entidad
+          irUbicacion(geojsonFeature, objeto.id);
         });
 
         const imgSVG = document.createElement("img");
@@ -54,7 +54,20 @@ function filtrarPorTipo() {
         imgSVG.setAttribute("height", "30");
         boton.appendChild(imgSVG);
 
+        const botonSave = document.createElement("button");
+        botonSave.setAttribute("id", "save")
+        botonSave.addEventListener("click", function () {
+          guardarCambios(objeto.id, index + 1); // Pasar el id y el índice de la fila a guardarCambios
+        });
+
+        const img_save = document.createElement("img");
+        img_save.setAttribute("src", "../assets/save.svg");
+        img_save.setAttribute("width", "30");
+        img_save.setAttribute("height", "30");
+        botonSave.appendChild(img_save);
+
         celdaBoton.appendChild(boton);
+        celdaBoton.appendChild(botonSave);
         fila.appendChild(celdaBoton);
 
         tabla.appendChild(fila);
@@ -75,24 +88,35 @@ function filtrarPorId() {
 
       const filaEncabezado = document.createElement("tr");
       if (data.length > 0) {
+        let index = 0;
         for (const propiedad in data[0]) {
           const celdaEncabezado = document.createElement("th");
           celdaEncabezado.textContent = propiedad;
           filaEncabezado.appendChild(celdaEncabezado);
+          if (propiedad === "nombre") {
+            nombreIndex = index;
+          } else if (propiedad === "tipo") {
+            tipoIndex = index;
+          }
+          index++;
         }
         const celdaEncabezadoUbicacion = document.createElement("th");
-        celdaEncabezadoUbicacion.textContent = "Ubicación";
+        celdaEncabezadoUbicacion.textContent = "Acciones";
         filaEncabezado.appendChild(celdaEncabezadoUbicacion);
       }
       tabla.appendChild(filaEncabezado);
 
-      data.forEach((objeto) => {
+      data.forEach((objeto, index) => {
         const fila = document.createElement("tr");
-        for (const propiedad in objeto) {
+        Object.keys(objeto).forEach((propiedad, i) => {
           const celda = document.createElement("td");
+          if (i === nombreIndex || i === tipoIndex) {
+            celda.setAttribute("contenteditable", "true");
+          }
           celda.textContent = objeto[propiedad];
           fila.appendChild(celda);
-        }
+        });
+
         const celdaBoton = document.createElement("td");
         const boton = document.createElement("button");
         boton.setAttribute("id", "ir-a");
@@ -106,7 +130,20 @@ function filtrarPorId() {
         imgSVG.setAttribute("height", "30");
         boton.appendChild(imgSVG);
 
+        const botonSave = document.createElement("button");
+        botonSave.setAttribute("id", "save")
+        botonSave.addEventListener("click", function () {
+          guardarCambios(objeto.id, index + 1); // Pasar el id y el índice de la fila a guardarCambios
+        });
+
+        const img_save = document.createElement("img");
+        img_save.setAttribute("src", "../assets/save.svg");
+        img_save.setAttribute("width", "30");
+        img_save.setAttribute("height", "30");
+        botonSave.appendChild(img_save);
+
         celdaBoton.appendChild(boton);
+        celdaBoton.appendChild(botonSave);
         fila.appendChild(celdaBoton);
 
         tabla.appendChild(fila);
@@ -155,7 +192,7 @@ function enviarActualizaciones(nombreT, cambios) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(cambios),
+    body: JSON.stringify([cambios]), // Envía los cambios como un arreglo
   };
 
   fetch(url, opciones)
@@ -168,23 +205,14 @@ function enviarActualizaciones(nombreT, cambios) {
     });
 }
 
-const nombreIndex = 1;
-const tipoIndex = 2;
-
-function guardarCambios() {
+function guardarCambios(rowId, rowIndex) {
   const tabla = document
     .getElementById("tabla-de-resultados")
     .querySelector("table");
-  const filas = tabla.querySelectorAll("tr");
-  const cambios = [];
-
-  for (let i = 1; i < filas.length; i++) {
-    const fila = filas[i];
-    const id = fila.querySelector("button[id='ir-a']").getAttribute("data-id");
-    const nombreEditado = fila.children[nombreIndex].textContent;
-    const tipoEditado = fila.children[tipoIndex].textContent;
-    cambios.push({ id, nombre: nombreEditado, tipo: tipoEditado });
-  }
-
-  enviarActualizaciones(nombreTabla, cambios);
+  const fila = tabla.querySelectorAll("tr")[rowIndex];
+  const id = rowId;
+  const nuevoNombre = fila.children[nombreIndex].textContent;
+  const nuevoTipo = fila.children[tipoIndex].textContent;
+  const cambios = { id, nuevoNombre, nuevoTipo }; // Asegúrate de que las propiedades coincidan con las del servidor
+  enviarActualizaciones(nombreTabla, cambios); // Envía solo los cambios de la fila específica
 }
