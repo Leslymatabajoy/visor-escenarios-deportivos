@@ -192,7 +192,6 @@ form .contenedor .contenedorTipo aside #tipo {
 
 .container .table-container .table {
   width: 100%;
-  margin-top: 15px;
   border-top: 2px solid #267282;
   padding: 10px;
 }
@@ -220,21 +219,6 @@ form .contenedor .contenedorTipo aside #tipo {
   margin: 10px;
 }
 
-.img-button {
-  width: 25px;
-  height: 25px;
-  margin: 4px;
-  cursor: pointer;
-  border: none;
-  background-image: url("../assets/defaultIcon.svg");
-  /* direccion de icono */
-}
-
-.img-button:active {
-  scale: 0.9;
-  /* cambio de tamaño levemente al dar click  en el boton */
-}
-
 #ir-a {
   border: none;
   background-color: transparent;
@@ -243,7 +227,7 @@ form .contenedor .contenedorTipo aside #tipo {
   cursor: pointer;
 }
 
-.table td:nth-child(5){
+.table td:nth-child(5) {
   display: flex;
 }
 
@@ -305,18 +289,8 @@ form .contenedor .contenedorTipo aside #tipo {
   /* Borde redondo */
 }
 
-.botones-de-edicion {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
-  border: none;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  /* Cambia el cursor al pasar el mouse sobre el botón */
-  border-radius: 5px;
-  /* Borde redondo */
+.botonInterno:active {
+  scale: 0.9;
 }
 
 .boton-de-mostrar {
@@ -342,6 +316,10 @@ form .contenedor .contenedorTipo aside #tipo {
   /* Borde redondo */
 }
 
+.boton-de-mostrar:active {
+  scale: 0.9;
+}
+
 /*Cambios en estilos predeterminados de leaflet*/
 .leaflet-control-scale {
   background: transparent;
@@ -361,8 +339,4 @@ form .contenedor .contenedorTipo aside #tipo {
     height: 450px;
     margin: 0;
   }
-}
-
-.table-container.my-4 {
-  display: none;
 }

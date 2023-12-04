@@ -43,7 +43,7 @@ function filtrarPorTipo() {
 
         const celdaBoton = document.createElement("td");
         const boton = document.createElement("button");
-        boton.setAttribute("id", "ir-a")
+        boton.setAttribute("id", "ir-a");
         boton.addEventListener("click", function () {
           irUbicacion(geojsonFeature, objeto.id);
         });
@@ -55,7 +55,7 @@ function filtrarPorTipo() {
         boton.appendChild(imgSVG);
 
         const botonSave = document.createElement("button");
-        botonSave.setAttribute("id", "save")
+        botonSave.setAttribute("id", "save");
         botonSave.addEventListener("click", function () {
           guardarCambios(objeto.id, index + 1); // Pasar el id y el índice de la fila a guardarCambios
         });
@@ -131,7 +131,7 @@ function filtrarPorId() {
         boton.appendChild(imgSVG);
 
         const botonSave = document.createElement("button");
-        botonSave.setAttribute("id", "save")
+        botonSave.setAttribute("id", "save");
         botonSave.addEventListener("click", function () {
           guardarCambios(objeto.id, index + 1); // Pasar el id y el índice de la fila a guardarCambios
         });
