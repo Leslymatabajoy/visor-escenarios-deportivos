@@ -1,0 +1,352 @@
+/* se define estilo del body, el contenedor del mapa y el mapa */
+body {
+  font-family: "Kite One", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background: linear-gradient(to bottom, #fffaf0, #deced1);
+  /* cambio de color con gradiente de arriba a abajo */
+}
+
+.container .form-container {
+  height: 90%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -6%;
+  z-index: 1000;
+  padding-left: 18px;
+}
+
+.container .form-container h4 {
+  font-size: smaller;
+  text-align: center;
+}
+
+.container-map {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.container-map .map {
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0px 2px 4px -1px rgba(0, 0, 0, 0.06);
+  /* pequeña sombra externa */
+}
+
+form {
+  position: absolute;
+  z-index: 1000;
+  margin: 8px;
+  top: 0;
+  box-shadow: 0 0 20px #deced1;
+  border-radius: 8px;
+  text-align: center;
+  width: 420px;
+  height: 400px;
+  background-color: #ffffff;
+}
+
+form .picture {
+  background-image: url("../assets/deporte.jpg");
+  background-size: cover;
+  width: 100%;
+  height: 40%;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  padding-bottom: 25px;
+  color: #ffffff;
+}
+
+form .picture h2 {
+  color: #ffffff;
+  /* Color del texto del título */
+  font-size: 28px;
+  /* Tamaño del texto de la etiqueta ID */
+  margin-top: 10%;
+  text-shadow: 2px 2px #5f96a1;
+  /* Sombra del texto del título */
+}
+
+form .contenedor {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+form .contenedor .contenedorId {
+  padding: 10px;
+  padding-inline-start: 20px;
+  padding-top: 10px;
+}
+
+form .contenedor .contenedorId aside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+form .contenedor .contenedorId .etiquetaId {
+  color: #267282;
+  font-size: 15px;
+  text-align: center;
+}
+
+form .contenedor .contenedorId aside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+form .contenedor .contenedorId aside #id {
+  color: #969a9b;
+  font-size: 12px;
+  border: 1px solid #969a9b;
+  border-radius: 8px;
+  width: 55%;
+  height: 25px;
+  outline: none;
+  padding-inline: 8px;
+}
+
+form .contenedor .contenedorTipo {
+  padding: 10px;
+  padding-inline-start: 20px;
+  padding-top: 0;
+}
+
+form .contenedor .contenedorTipo .etiquetaTipo {
+  color: #267282;
+  font-size: 15px;
+  text-align: center;
+}
+
+form .contenedor .contenedorTipo aside {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+form .contenedor .contenedorTipo aside #tipo {
+  color: #969a9b;
+  /* Color del texto del input */
+  font-size: 12px;
+  /* Tamaño del texto del input */
+  border: 1px solid #969a9b;
+  /* Borde del input */
+  border-radius: 8px;
+  /* Borde redondeado del input */
+  width: 60%;
+  /* Ancho del input */
+  height: 25px;
+  padding-inline: 8px;
+}
+
+.contenedor-botones {
+  width: 100%;
+  /* Ancho del contenedor de botones */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.container .table-container {
+  position: absolute;
+  z-index: 10000;
+  margin: 0;
+  /* Reducir el ancho y la altura */
+  width: 100%;
+  height: 280px;
+  bottom: 0;
+  left: 0;
+  background-color: #f9f5f2;
+  overflow: auto;
+  font-size: 12px;
+  display: none;
+}
+
+.container .table-container .table {
+  width: 100%;
+  margin-top: 15px;
+  border-top: 2px solid #267282;
+  padding: 10px;
+}
+
+.container .table-container .table th {
+  /*Columna principal*/
+  background-color: #267282;
+  /*#4CAF50*/
+  color: white;
+  text-align: left;
+  padding: 10px;
+}
+
+.container .table-container .table td {
+  /*bordes tabla*/
+  border: 1px solid #dcd6d6;
+  padding: 8px;
+}
+
+.container .table-container .buttons-table-container {
+  display: flex;
+  justify-content: left;
+  gap: 20px;
+  width: auto;
+  margin: 10px;
+}
+
+.img-button {
+  width: 25px;
+  height: 25px;
+  margin: 4px;
+  cursor: pointer;
+  border: none;
+  background-image: url("../assets/defaultIcon.svg");
+  /* direccion de icono */
+}
+
+.img-button:active {
+  scale: 0.9;
+  /* cambio de tamaño levemente al dar click  en el boton */
+}
+
+#ir-a {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#ir-a:active {
+  scale: 0.9;
+}
+
+#boton-gps {
+  background-color: #ffff;
+  border-radius: 5px;
+  border: solid 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+}
+
+.img-button-gps {
+  width: 25px;
+  height: 25px;
+  margin: 4px;
+  cursor: pointer;
+  border: none;
+  background-image: url("../assets/markerIcon.svg");
+}
+
+/* se definen los estilos de los botones fuera del mapa */
+.botonInterno {
+  /* es una clase que se usa en diferentes partes*/
+  background-color: #addce8;
+  /* Color de fondo del botón */
+  color: #000000;
+  /* Color del texto del botón */
+  border: none;
+  /* Sin bordes */
+  padding: 8px 15px;
+  /* Espaciado interno del botón */
+  text-align: center;
+  /* Alineación del texto */
+  text-decoration: none;
+  /* Sin decoración del texto */
+  display: inline-block;
+  /* Para que se muestren en una sola línea */
+  font-size: 12px;
+  /* Tamaño del texto */
+  /* Margen alrededor del botón */
+  cursor: pointer;
+  /* Cambia el cursor al pasar el mouse sobre el botón */
+  border-radius: 10px;
+  /* Borde redondo */
+}
+
+.botones-de-edicion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
+  border: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  /* Cambia el cursor al pasar el mouse sobre el botón */
+  border-radius: 5px;
+  /* Borde redondo */
+}
+
+.boton-de-mostrar {
+  background-color: #267282 /*#901027*/;
+  /* Color de fondo del botón */
+  color: #ffffff;
+  /* Color del texto del botón */
+  border: none;
+  /* Sin bordes */
+  padding: 10px 15px;
+  /* Espaciado interno del botón */
+  text-align: center;
+  /* Alineación del texto */
+  text-decoration: none;
+  /* Sin decoración del texto */
+  display: inline-block;
+  /* Para que se muestre en una sola línea */
+  font-size: 12px;
+  /* Tamaño del texto */
+  cursor: pointer;
+  /* Cambia el cursor al pasar el mouse sobre el botón */
+  border-radius: 10px;
+  /* Borde redondo */
+}
+
+/*Cambios en estilos predeterminados de leaflet*/
+.leaflet-control-scale {
+  background: transparent;
+  opacity: 0.5;
+}
+
+.leaflet-grid-label {
+  color: #5c6062;
+  opacity: 0.4;
+  /* opacidad  de las coordenadas */
+}
+
+/*Responsive*/
+@media (max-width: 680px) {
+  form {
+    width: 100vw;
+    height: 450px;
+    margin: 0;
+  }
+}
+
+.table-container.my-4 {
+  display: none;
+}
