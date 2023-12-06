@@ -3,7 +3,7 @@ let nombreIndex, tipoIndex; // Definirlos fuera de la función para que sean acc
 
 function filtrarPorTipo() {
   const tipo = document.getElementById("tipo").value;
-  fetch("http://localhost:5501/filtrarTipo/" + nombreTabla + "/" + tipo)
+  fetch("http://localhost:5502/filtrarTipo/" + nombreTabla + "/" + tipo)
     .then((response) => response.json())
     .then((data) => {
       const divResultados = document.getElementById("tabla-de-resultados");
@@ -79,7 +79,7 @@ function filtrarPorTipo() {
 
 function filtrarPorId() {
   const id = document.getElementById("id").value;
-  fetch("http://localhost:5501/filtrarId/" + nombreTabla + "/" + id)
+  fetch("http://localhost:5502/filtrarId/" + nombreTabla + "/" + id)
     .then((response) => response.json())
     .then((data) => {
       const divResultados = document.getElementById("tabla-de-resultados");
@@ -186,7 +186,7 @@ function irUbicacion(geojsonFeature, entidadId) {
 }
 
 function enviarActualizaciones(nombreT, cambios) {
-  const url = `http://localhost:5501/EditarNombreYTipo/${nombreT}`;
+  const url = `http://localhost:5502/EditarNombreYTipo/${nombreT}`;
   const opciones = {
     method: "PUT",
     headers: {

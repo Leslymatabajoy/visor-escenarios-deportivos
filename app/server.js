@@ -46,5 +46,5 @@ app.put("/EditarNombreYTipo/:nombreTabla", async (req, res) => {
 });
 
 app.listen(5501, () => {
-  console.log("Servidor escuchando en el puerto 5501");
+  console.log("Servidor escuchando en el puerto 5502");
 });
