@@ -1,15 +1,18 @@
-// server.js
 const express = require("express");
-const cors = require("cors");
-const app = express();
-app.use(cors());
-app.use(express.json());
+const router = express.Router();
 const { FiltrarTipo, FiltrarId, EditarNombreYTipo } = require("./methods");
 const entidad_tipo = new FiltrarTipo();
 const entidad_id = new FiltrarId();
 const editar = new EditarNombreYTipo();
 
-app.get("/FiltrarTipo/:nombreTabla/:tipo", async (req, res) => {
+router.get('/', (req, res) => {
+  res.redirect('/home')
+})
+router.get('/home', (req, res) => {
+  res.render('index')
+})
+
+router.get("/FiltrarTipo/:nombreTabla/:tipo", async (req, res) => {
   const resultado = await entidad_tipo.filtrarTipo(
     req.params.nombreTabla,
     req.params.tipo
@@ -17,7 +20,7 @@ app.get("/FiltrarTipo/:nombreTabla/:tipo", async (req, res) => {
   res.json(resultado);
 });
 
-app.get("/FiltrarId/:nombreTabla/:id", async (req, res) => {
+router.get("/FiltrarId/:nombreTabla/:id", async (req, res) => {
   const resultado = await entidad_id.filtrarId(
     req.params.nombreTabla,
     req.params.id
@@ -25,7 +28,7 @@ app.get("/FiltrarId/:nombreTabla/:id", async (req, res) => {
   res.json(resultado);
 });
 
-app.put("/EditarNombreYTipo/:nombreTabla", async (req, res) => {
+router.put("/EditarNombreYTipo/:nombreTabla", async (req, res) => {
   const { nombreTabla } = req.params;
   const cambios = req.body; // Recibe el arreglo de cambios del cuerpo de la solicitud
 
@@ -45,6 +48,4 @@ app.put("/EditarNombreYTipo/:nombreTabla", async (req, res) => {
   }
 });
 
-app.listen(5502, () => {
-  console.log("Servidor escuchando en el puerto 5502");
-});
+module.exports = router;
