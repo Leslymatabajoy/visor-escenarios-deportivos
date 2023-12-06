@@ -1,4 +1,3 @@
-const { log } = require("console");
 const pool = require("./db"); // debes importar pool desde tu archivo de base de datos db.js
 
 class FiltrarTipo {
