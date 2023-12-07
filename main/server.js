@@ -19,7 +19,9 @@ app.use((err, req, res, next) => {
   res.status(500).render("error", { error: "Ocurrio un error en el servidor" });
 });
 
-const server = app.listen(5502, () => {
+const port = process.env.PORT || 5502;
+
+const server = app.listen(port, () => {
   console.log("Servidor escuchando en el puerto 5502");
   const url = "http://localhost:5502";
   switch (process.platform) {
