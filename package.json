@@ -7,5 +7,8 @@
     "node-windows": "^1.0.0-beta.8",
     "pg": "^8.11.3",
     "require": "^2.4.20"
+  }, 
+  "scripts":{
+    "start": "node main/server.js"
   }
 }
